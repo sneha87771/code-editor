@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Code Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c425e24a8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="left">
+            <label><i class="fa-brands fa-html5"></i> HTML</label>
+            <textarea id="html-code" onkeyup="run()"></textarea>
+
+            <label><i class="fa-brands fa-css3-alt"></i> CSS</label>
+            <textarea id="css-code" onkeyup="run()"></textarea>
+
+            <label><i class="fa-brands fa-js"></i> JavaScript</label>
+            <textarea id="js-code" onkeyup="run()"></textarea>
+        </div>
+        <div class="right">
+            <label><i class="fa-solid fa-play"></i> Output</label>
+            <iframe id="output"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function run() {
+            // Get the values from the textareas
+            let htmlCode = document.getElementById("html-code").value;
+            let cssCode = "<style>" + document.getElementById("css-code").value + "</style>";
+            let jsCode = "<script>" + document.getElementById("js-code").value + "<\/script>";
+            
+            // Get the output iframe and its document
+            let output = document.getElementById("output");
+            let outputDocument = output.contentDocument || output.contentWindow.document;
+
+            // Clear the iframe
+            outputDocument.open();
+            outputDocument.write('');
+            outputDocument.close();
+
+            // Write HTML, CSS, and JavaScript into the iframe
+            outputDocument.open();
+            outputDocument.write(htmlCode + cssCode + jsCode);
+            outputDocument.close();
+        }
+    </script>
+
+</body>
+</html>
